@@ -9,11 +9,18 @@ public class EmployeeDemo {
         EmployeeStorage storage = new EmployeeStorage();
 
         while (true) {
-            System.out.println("0 for exi || 1 add employee || 2 print all employee || 3 search employee by employee ID, 4 search employee by company name");
-            int co = scanner.nextInt();
+            System.out.println("""
+                    0 exit
+                    1 add
+                    2 print all
+                    3 search by ID
+                    4 search by company
+                    5 search by position level (JUNIOR/MIDDLE/SENIOR/LEAD)
+                    """);
+            int sc = scanner.nextInt();
             scanner.nextLine();
 
-            switch (co) {
+            switch (sc) {
 
                 case 0 -> {
                     return;
@@ -33,8 +40,10 @@ public class EmployeeDemo {
                     String empCompany = scanner.nextLine();
                     System.out.println("position");
                     String empPosition = scanner.nextLine();
+                    String empLevelStr = scanner.nextLine().toUpperCase();
+                    PositionLevel level = PositionLevel.valueOf(empLevelStr);
 
-                    storage.addEmployee(new Employee(empName, empSurname, empID, empSalary, empCompany, empPosition));
+                    storage.addEmployee(new Employee(empName, empSurname, empID, empSalary, empCompany, empPosition,level));
                 }
                 case 2 -> {
                     System.out.println("տպելու է բոլոր աշխատակիցներին");
@@ -51,6 +60,12 @@ public class EmployeeDemo {
                     System.out.println("Մուտքագրեք company name:");
                     String company = scanner.nextLine();
                     storage.searchCompany(company);
+                }
+                case 5 -> {
+                    System.out.println("Մուտքագրեք position level:");
+                    String lvl = scanner.nextLine().toUpperCase();
+                    PositionLevel level = PositionLevel.valueOf(lvl);
+                    storage.searchByLevel(level);
                 }
                 default -> System.out.println("Սխալ հրաման");
 

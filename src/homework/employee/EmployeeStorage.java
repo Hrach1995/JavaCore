@@ -33,5 +33,13 @@ public class EmployeeStorage {
         }
     }
 
+    public void searchByLevel(PositionLevel level) {
+        for(Employee e : employees) {
+            if(e.getLevel() == level) {
+                System.out.println(e);
+            }
+        }
+    }
+
 
 }
